@@ -1,7 +1,7 @@
 # Polenes Bot
 
 Bot de telegram que responde con el nivel de polen en Santiago, obtenido de
-[polenes.cl](polenes.cl).
+[polenes.cl](http://polenes.cl).
 
 ## Cómo usar
 
