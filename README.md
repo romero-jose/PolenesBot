@@ -16,5 +16,5 @@ una versión propia como se detalla en la sección siguiente.
    `source .venv/bin/activate` (aunque puede variar dependiando de la
    plataforma)
 3. Instalar las dependencias con `python -m pip install -r requirements.txt`
-4. Generar una credencial con @BotFather y guardarla en `credenciales.txt`
+4. Generar una credencial con @BotFather y guardarla en `credential.txt`
 5. Ejecutar con `python polenesbot.py`
