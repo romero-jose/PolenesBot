@@ -9,7 +9,7 @@ KEYWORDS = ['arbol', 'platano', 'pasto', 'maleza']
 FULL_NAMES = {
     'arbol': 'total de árboles',
     'platano': 'plátano oriental',
-    'pastos': 'pasto',
+    'pasto': 'pasto',
     'maleza': 'maleza',
 }
 
