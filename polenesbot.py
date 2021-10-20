@@ -1,11 +1,13 @@
+import os
 import logging
+
+from dotenv import load_dotenv
+load_dotenv()
 
 from telegram import Update, ForceReply
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext
 
 import scrape
-
-CREDENTIAL_FILE = 'credential.txt'
 
 # Enable logging
 logging.basicConfig(
@@ -46,9 +48,8 @@ def polenes(update: Update, context: CallbackContext) -> None:
 
 
 def main() -> None:
-    # Creat the Updater and pass it to the bot's token from a file
-    with open(CREDENTIAL_FILE) as file:
-        updater = Updater(file.readline().strip())
+    # Create the Updater and pass it the token from the environment
+    updater = Updater(os.environ['TELEGRAM_TOKEN'])
 
     # Get the dispatcher to registre handlers
     dispatcher = updater.dispatcher
