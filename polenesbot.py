@@ -1,13 +1,16 @@
+import scrape
+from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext
+from telegram import Update, ForceReply
 import os
 import logging
 
 from dotenv import load_dotenv
 load_dotenv()
 
-from telegram import Update, ForceReply
-from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext
 
-import scrape
+PORT = int(os.environ.get('PORT', '8443'))
+TOKEN = os.environ.get('TELEGRAM_TOKEN')
+URL = os.environ.get('URL')
 
 # Enable logging
 logging.basicConfig(
@@ -48,8 +51,8 @@ def polenes(update: Update, context: CallbackContext) -> None:
 
 
 def main() -> None:
-    # Create the Updater and pass it the token from the environment
-    updater = Updater(os.environ['TELEGRAM_TOKEN'])
+    # Create the Updater and pass it the token
+    updater = Updater(TOKEN)
 
     # Get the dispatcher to registre handlers
     dispatcher = updater.dispatcher
@@ -63,11 +66,13 @@ def main() -> None:
         Filters.text & ~Filters.command, polenes))
 
     # Start the Bot
-    updater.start_polling()
+    updater.start_webhook(listen='0.0.0.0',
+                          port=PORT,
+                          url_path=TOKEN,
+                          webhook_url=URL + TOKEN)
 
     # Run the but until you press Ctrl-C or the process recieves SIGINT,
-    # SIGTERM or SIGABRT. This should be used most of the time, since
-    # start_polling() is non-blocking and will stop the bot gracefully.
+    # SIGTERM or SIGABRT. This should be used most of the time.
     updater.idle()
 
 
