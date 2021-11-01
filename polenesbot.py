@@ -44,8 +44,15 @@ def polenes(update: Update, context: CallbackContext) -> None:
     text = update.message.text
     text = text.lower()
     polenes = scrape.scrape_polenes()
+    matches = []
     for name, value in polenes.items():
         if text.find(name.lower()) != -1:
+            matches.append((name, value))
+    if not matches:
+        update.message.reply_text(
+            f"Los tipos de polenes soportados son: {', '.join(scrape.KEYWORDS[:-1])} y {scrape.KEYWORDS[-1]}.")
+    else:
+        for name, value in matches:
             update.message.reply_text(
                 f"Actualmente hay {value} g/m^3 de polen de {scrape.FULL_NAMES[name]}")
 
