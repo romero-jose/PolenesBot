@@ -24,7 +24,7 @@ def start(update: Update, context: CallbackContext) -> None:
     """Send a message when the command /start is issued."""
     user = update.effective_user
     update.message.reply_markdown_v2(
-        fr'Hi {user.mention_markdown_v2()}\!',
+        fr'Hola {user.mention_markdown_v2()}, me puedes preguntar por el nivel de polen y te responderé\. Los datos son de polenes\.cl, puedes visitarlos para tener más información\.',
         reply_markup=ForceReply(selective=True),
     )
 
