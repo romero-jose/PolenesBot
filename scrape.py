@@ -25,9 +25,9 @@ KEYWORDS: Dict[str, Pollen] = {
 }
 FULL_NAMES: Dict[Pollen, str] = {
     Pollen.ARBOL: 'total de árboles',
-    Pollen.PLATANO: 'plátano oriental',
-    Pollen.PASTO: 'pasto',
-    Pollen.MALEZA: 'maleza',
+    Pollen.PLATANO: 'de plátano oriental',
+    Pollen.PASTO: 'de pasto',
+    Pollen.MALEZA: 'de maleza',
     Pollen.TOTAL: 'total',
 }
 TABLE_ORDER: list(Pollen) = [Pollen.ARBOL,

@@ -3,6 +3,7 @@ from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, Callb
 from telegram import Update, ForceReply
 import os
 import logging
+import unidecode
 
 from dotenv import load_dotenv
 load_dotenv()
@@ -42,6 +43,7 @@ def echo(update: Update, context: CallbackContext) -> None:
 def polenes(update: Update, context: CallbackContext) -> None:
     """Respond with the corresponding pollen level"""
     text = update.message.text
+    text = unidecode.unidecode(text, 'utf-8')
     text = text.lower()
     polenes = scrape.scrape_polenes()
     matches = []
@@ -49,12 +51,13 @@ def polenes(update: Update, context: CallbackContext) -> None:
         if text.find(keyword) != -1:
             matches.append((pollen, polenes[pollen]))
     if not matches:
+        names = list(scrape.FULL_NAMES.values())
         update.message.reply_text(
-            f"Los tipos de polenes soportados son: {', '.join(scrape.KEYWORDS[:-1])} y {scrape.KEYWORDS[-1]}.")
+            f"Los tipos de polenes soportados son: {', '.join(names[:-1])} y {names[-1]}.")
     else:
         for name, value in matches:
             update.message.reply_text(
-                f"Actualmente hay {value} gr/m^3 de polen de {scrape.FULL_NAMES[name]}")
+                f"Actualmente hay {value} gr/m^3 de polen {scrape.FULL_NAMES[name]}")
 
 
 def main() -> None:
