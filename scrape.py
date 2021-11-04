@@ -1,7 +1,7 @@
 import re
 import requests
 from enum import Enum, auto
-from typing import Dict
+from typing import Dict, List
 from bs4 import BeautifulSoup
 
 
@@ -30,14 +30,14 @@ FULL_NAMES: Dict[Pollen, str] = {
     Pollen.MALEZA: 'de maleza',
     Pollen.TOTAL: 'total',
 }
-TABLE_ORDER: list(Pollen) = [Pollen.ARBOL,
+TABLE_ORDER: List[Pollen] = [Pollen.ARBOL,
                              Pollen.PLATANO,
                              Pollen.PASTO,
                              Pollen.MALEZA,
                              Pollen.TOTAL, ]
 
 
-def scrape_polenes(url=URL) -> Dict[Pollen, int]:
+def scrape_polenes(url : str=URL) -> Dict[Pollen, int]:
     site = requests.get(url)
     soup = BeautifulSoup(site.content, "html.parser")
     rows = soup.find('table') \
