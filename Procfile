@@ -1,1 +1,1 @@
-web: python3 polenesbot.py
+web: python3 src/polenesbot.py

@@ -39,9 +39,13 @@ TABLE_ORDER: List[Pollen] = [
 ]
 
 
-def scrape_polenes(url: str = URL) -> Dict[Pollen, int]:
-    site = requests.get(url)
-    soup = BeautifulSoup(site.content, "html.parser")
+def fetch_content():
+    response = requests.get(URL)
+    return response.content
+
+
+def scrape_content(content: bytes) -> Dict[Pollen, int]:
+    soup = BeautifulSoup(content, "html.parser")
     rows = soup.find("table").find("table").find_all("tr")
     last_row = rows[-1]
 
@@ -52,3 +56,7 @@ def scrape_polenes(url: str = URL) -> Dict[Pollen, int]:
     polenes = dict(zip(TABLE_ORDER, numbers))
     polenes[Pollen.TOTAL] = sum(polenes.values())
     return polenes
+
+
+def scrape_polenes() -> Dict[Pollen, int]:
+    return scrape_content(fetch_content())
