@@ -1,3 +1,4 @@
+import time
 import re
 import requests
 from enum import Enum, auto
@@ -42,6 +43,14 @@ TABLE_ORDER: List[Pollen] = [
 def fetch_content() -> str:
     response = requests.get(URL)
     return response.text
+
+
+def fetch_content_cached(prev_time=time.time(), cached=None) -> str:
+    curr_time = time.time()
+    if cached is None or curr_time - prev_time > 60:
+        cached = fetch_content()
+    prev_time = curr_time
+    return cached
 
 
 def scrape_content(content: str) -> Dict[Pollen, int]:
