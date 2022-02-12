@@ -17,8 +17,8 @@ load_dotenv()
 
 
 PORT = int(os.environ.get("PORT", "8443"))
-TOKEN = os.environ.get("TELEGRAM_TOKEN")
-URL = os.environ.get("URL")
+TOKEN = os.environ.get("TELEGRAM_TOKEN", "")
+URL = os.environ.get("URL", "")
 
 # Enable logging
 logging.basicConfig(

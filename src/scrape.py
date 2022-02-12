@@ -39,12 +39,12 @@ TABLE_ORDER: List[Pollen] = [
 ]
 
 
-def fetch_content():
+def fetch_content() -> str:
     response = requests.get(URL)
-    return response.content
+    return response.text
 
 
-def scrape_content(content: bytes) -> Dict[Pollen, int]:
+def scrape_content(content: str) -> Dict[Pollen, int]:
     soup = BeautifulSoup(content, "html.parser")
     rows = soup.find("table").find("table").find_all("tr")
     last_row = rows[-1]
